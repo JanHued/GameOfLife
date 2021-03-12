@@ -24,11 +24,12 @@ public class Ocean {
     private Ocean() {
         size = Simulation.simulationSize;
         this.cells = new ArrayList<>();
-        IntStream.of(size).forEach(j -> cells.add(
-                IntStream.of(size)
-                        .mapToObj(i -> Cell.createCellAtPosition(Position.createPositionAt(j, i)))
-                        .collect(Collectors.toList()))
-        );
+        for (int i = 0; i < size; i++) {
+            cells.add(new ArrayList<>());
+            for (int j = 0; j < size; j++) {
+                cells.get(i).add(Cell.createCellAtPosition(Position.createPositionAt(i, j)));
+            }
+        }
         instance = this;
     }
 
@@ -78,8 +79,8 @@ public class Ocean {
                         .addPlanktonUnit());
     }
 
-    public long getNumberOfLifeformsInOcean(Ocean ocean) {
-        return ocean.getCells()
+    public long getNumberOfLifeforms() {
+        return this.getCells()
                 .stream()
                 .map(cells -> cells.stream()
                         .map(Cell::getCellContent)

@@ -2,16 +2,14 @@ package environment;
 
 import oceanicobjects.Lifeform;
 
-import javax.naming.event.ObjectChangeListener;
-
 public class Simulation {
     public final static Integer simulationSize = 100;
-    public final static Integer breedingTimeOfFish = 20;
-    public final static Integer breedingTimeOfShark = 40;
+    public final static Integer breedingWeightOfFish = 20;
+    public final static Integer breedingWeightOfShark = 200;
     public final static Integer initialWeightOfFish = 10;
     public final static Integer initialWeightOfShark = 100;
-    public final static Integer maximumNumberOfTimesteps = 1000;
 
+    private final Integer maximumNumberOfTimesteps;
     private final Integer initialNumberOfFish;
     private final Integer initialNumberOfSharks;
     private final Integer initialNumberOfRocks;
@@ -19,13 +17,12 @@ public class Simulation {
 
     private Integer currentTimestep;
 
-
-    public Simulation(Integer initialNumberOfFish, Integer initialNumberOfSharks, Integer initialNumberOfRocks,
-                      Integer planktonUnitsPerTimestep) {
-        this.initialNumberOfFish = initialNumberOfFish;
-        this.initialNumberOfSharks = initialNumberOfSharks;
-        this.initialNumberOfRocks = initialNumberOfRocks;
-        this.planktonUnitsPerTimestep = planktonUnitsPerTimestep;
+    public Simulation(SimulationInput simulationInput) {
+        this.maximumNumberOfTimesteps = simulationInput.getMaximumNumberOfTimesteps();
+        this.initialNumberOfFish = simulationInput.getInitialNumberOfFish();
+        this.initialNumberOfSharks = simulationInput.getInitialNumberOfSharks();
+        this.initialNumberOfRocks = simulationInput.getInitialNumberOfRocks();
+        this.planktonUnitsPerTimestep = simulationInput.getPlanktonUnitsPerTimestep();
         this.currentTimestep = 0;
     }
 
@@ -67,6 +64,6 @@ public class Simulation {
     }
 
     private boolean allLifeEndedInOcean(Ocean ocean) {
-        return ocean.getNumberOfLifeformsInOcean(ocean).equals(0);
+        return ocean.getNumberOfLifeforms() == 0;
     }
 }

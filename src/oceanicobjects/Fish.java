@@ -2,8 +2,6 @@ package oceanicobjects;
 
 import environment.*;
 
-import java.math.RoundingMode;
-
 public class Fish extends Lifeform {
 
     private Fish(Integer weight, Position position) {
@@ -17,7 +15,7 @@ public class Fish extends Lifeform {
     protected void moveAndEat() {
         Ocean instanceOfOcean = Ocean.retrieveInstance();
         Position currentPosition = this.getPosition();
-        Cell targetCell = instanceOfOcean.fetchTargetCellOfPositionInDirection(currentPosition, randomlyChosenDirection());
+        Cell targetCell = instanceOfOcean.fetchTargetCellOfPositionInDirection(currentPosition, fetchRandomlyChosenDirection());
         if (possibleToMoveTo(targetCell)) {
             moveFromCellToCellAndEat(instanceOfOcean.fetchCellAtPosition(currentPosition), targetCell);
         }
@@ -35,6 +33,6 @@ public class Fish extends Lifeform {
     }
 
     protected boolean isMature() {
-        return age >= Simulation.breedingTimeOfFish;
+        return weight >= Simulation.breedingWeightOfFish;
     }
 }

@@ -14,7 +14,17 @@ public class Position {
     }
 
     protected static Position createPositionAt(Integer horizontalPosition, Integer verticalPosition) {
-        return new Position(horizontalPosition, verticalPosition);
+        return new Position(mapToPeriodicBoundaries(horizontalPosition), mapToPeriodicBoundaries(verticalPosition));
+    }
+
+    private static Integer mapToPeriodicBoundaries(Integer position) {
+        if (position < 0) {
+            position += Simulation.simulationSize;
+        }
+        if (position >= Simulation.simulationSize) {
+            position -= Simulation.simulationSize;
+        }
+        return position;
     }
 
     protected Integer getHorizontalPosition() {

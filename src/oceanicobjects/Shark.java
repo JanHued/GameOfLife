@@ -22,7 +22,7 @@ public class Shark extends Lifeform {
         List<Cell> neighbourCells = instanceOfOcean.fetchNeighbourCellsOfPosition(position);
         Cell targetCell = choosePreferedCellFromList(neighbourCells);
         if (targetCell == null) {
-            targetCell = instanceOfOcean.fetchTargetCellOfPositionInDirection(currentPosition, randomlyChosenDirection());
+            targetCell = instanceOfOcean.fetchTargetCellOfPositionInDirection(currentPosition, fetchRandomlyChosenDirection());
         }
         if (possibleToMoveTo(targetCell)) {
             moveFromCellToCellAndEat(instanceOfOcean.fetchCellAtPosition(currentPosition), targetCell);
@@ -54,6 +54,6 @@ public class Shark extends Lifeform {
     }
 
     protected boolean isMature() {
-        return age >= Simulation.breedingTimeOfShark;
+        return weight >= Simulation.breedingWeightOfShark;
     }
 }

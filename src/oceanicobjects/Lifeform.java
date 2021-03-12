@@ -5,7 +5,6 @@ import environment.*;
 import java.util.Random;
 
 public abstract class Lifeform extends CellContent {
-    Integer age;
     Integer weight;
     Position position;
     boolean timestepDone;
@@ -25,7 +24,6 @@ public abstract class Lifeform extends CellContent {
     }
 
     protected Lifeform(Integer weight, Position position) {
-        this.age = 0;
         this.weight = weight;
         this.position = position;
         timestepDone = true;
@@ -60,7 +58,6 @@ public abstract class Lifeform extends CellContent {
     }
 
     protected final void age() {
-        age++;
         weight--;
     }
 
@@ -70,7 +67,7 @@ public abstract class Lifeform extends CellContent {
 
     protected abstract void moveFromCellToCellAndEat(Cell currentCell, Cell targetCell);
 
-    Direction randomlyChosenDirection() {
+    Direction fetchRandomlyChosenDirection() {
         return Direction.values()[rand.nextInt(8)];
     }
 
