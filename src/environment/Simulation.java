@@ -1,9 +1,10 @@
 package environment;
 
+import oceanicobjects.CellContent;
 import oceanicobjects.Lifeform;
 
 public class Simulation {
-    public final static Integer simulationSize = 100;
+    public final static Integer simulationSize = 20;
     public final static Integer breedingWeightOfFish = 20;
     public final static Integer breedingWeightOfShark = 200;
     public final static Integer initialWeightOfFish = 10;
@@ -31,10 +32,22 @@ public class Simulation {
                 .setFish(initialNumberOfFish)
                 .setSharks(initialNumberOfSharks)
                 .setRocks(initialNumberOfRocks)
+                .floodRemainingCells()
                 .build();
         while (!stopSimulationForOcean(ocean)) {
+            print(ocean);
             currentTimestep++;
             doTimestep(ocean);
+        }
+    }
+
+    private void print(Ocean ocean) {
+        for (int i = 0; i < Simulation.simulationSize - 1; i++) {
+            for (int j = 0; j < Simulation.simulationSize - 1; j++) {
+                ocean.getCells().get(i).get(j).getCellContent().print();
+                System.out.print(" ");
+            }
+            System.out.println("");
         }
     }
 

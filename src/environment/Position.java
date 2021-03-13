@@ -1,6 +1,9 @@
 package environment;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Stream;
 
 public class Position {
     private final Integer horizontalPosition;
@@ -42,5 +45,15 @@ public class Position {
     protected static Position fetchPositionFromPositionInDirection(Position position, Direction direction) {
         return Position.createPositionAt(position.horizontalPosition + direction.getPositionalDelta().horizontalPosition,
                 position.verticalPosition + direction.getPositionalDelta().verticalPosition);
+    }
+
+    protected static List<Position> fetchAllPositions() {
+        List<Position> result = new ArrayList<>();
+        for (int i = 0; i < Simulation.simulationSize-1; i++) {
+            for (int j = 0; j < Simulation.simulationSize-1; j++) {
+                result.add(Position.createPositionAt(i, j));
+            }
+        }
+        return result;
     }
 }

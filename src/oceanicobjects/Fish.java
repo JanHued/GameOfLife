@@ -35,4 +35,8 @@ public class Fish extends Lifeform {
     protected boolean isMature() {
         return weight >= Simulation.breedingWeightOfFish;
     }
+
+    public void print(){
+        System.out.print("F");
+    }
 }

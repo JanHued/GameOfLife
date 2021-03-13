@@ -56,4 +56,8 @@ public class Shark extends Lifeform {
     protected boolean isMature() {
         return weight >= Simulation.breedingWeightOfShark;
     }
+
+    public void print(){
+        System.out.print("S");
+    }
 }

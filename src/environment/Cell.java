@@ -2,6 +2,7 @@ package environment;
 
 import oceanicobjects.CellContent;
 import oceanicobjects.Lifeform;
+import oceanicobjects.Water;
 
 public class Cell {
     private Integer planktonUnits;
@@ -36,7 +37,7 @@ public class Cell {
     }
 
     public Boolean isEmpty() {
-        return cellContent == null;
+        return cellContent instanceof Water;
     }
 
     public void enter(Lifeform lifeform) {
@@ -44,6 +45,6 @@ public class Cell {
     }
 
     public void leave() {
-        cellContent = null;
+        cellContent = Water.createWater();
     }
 }

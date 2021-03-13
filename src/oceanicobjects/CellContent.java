@@ -1,4 +1,5 @@
 package oceanicobjects;
 
-public class CellContent {
+public abstract class CellContent {
+    public abstract void print();
 }

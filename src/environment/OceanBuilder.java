@@ -1,9 +1,6 @@
 package environment;
 
-import oceanicobjects.CellContent;
-import oceanicobjects.Fish;
-import oceanicobjects.Rock;
-import oceanicobjects.Shark;
+import oceanicobjects.*;
 
 public class OceanBuilder {
 
@@ -46,16 +43,21 @@ public class OceanBuilder {
         return this;
     }
 
+    protected OceanBuilder floodRemainingCells() {
+        Position.fetchAllPositions().forEach(pos -> setOceanicObjectToPosition(Water.createWater(), pos));
+        return this;
+    }
+
     private boolean setOceanicObjectToPosition(CellContent oceanicObject, Position position) {
         Cell cellToFill = ocean.fetchCellAtPosition(position);
-        if (cellToFill.isEmpty()) {
+        if (cellToFill.getCellContent() == null) {
             cellToFill.setCellContent(oceanicObject);
             return true;
         }
         return false;
     }
 
-    protected Ocean build(){
+    protected Ocean build() {
         return ocean;
     }
 }
